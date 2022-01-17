@@ -1,2 +1,2 @@
 # Base-project
-Base-project set up
+Base-project set up with server, modules and cypress ✨
