@@ -105,6 +105,17 @@ Add `<link rel="stylesheet" type="text/css" href="./index.css">` to head of html
 
 ## set up creat db and repopulate db for other people to use if they download it. 
 
+## Middleware 
+To chain information
+
+```js
+// set up body parser
+const bodyParser = express.urlencoded();
+
+// pass body paser in as an argument to get access to the request.body.
+server.post("/", bodyParser, home.addFact);
+```
+
 ## Deploy to Heroku
 1. Create account
 2. Create new app (*lowercase name and europe region*)
