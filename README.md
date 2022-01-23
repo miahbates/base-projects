@@ -99,15 +99,83 @@ server.use(staticHandler);
 ```
 Add `<link rel="stylesheet" type="text/css" href="./index.css">` to head of html.
 
+## Database file set-up 
+1. Create `database` folder on root
+2. Add `connection.js` file
+```js
+// Inside file add
+const { Pool } = require("pg");
+
+// DB URL should either be read from .env in development
+// or set as part of production deployment (e.g. on Heroku)
+if (!process.env.DATABASE_URL) {
+  console.log(process.env.DATABASE_URL);
+  throw new Error("Missing DATABASE_URL env var");
+}
+console.log(process.env.DATABASE_URL);
+
+// Connect to the database
+// and create a pool of available connections to support simultaneous requests
+const db = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
+// export the pool object so we can query the DB in other files
+module.exports = db;
+```
+4. Add `init.sql` file.
+```sql 
+BEGIN;
+
+DROP TABLE IF EXISTS users, user_facts CASCADE;
+
+-- Create tables and define their columns
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  first_name VARCHAR(100) NOT NULL,
+  cohort VARCHAR(6)
+
+);
+
+CREATE TABLE user_facts (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id),
+  facts TEXT
+);
+
+-- Insert some example data for us to test with
+
+INSERT INTO users (first_name, cohort) VALUES
+  ('Oli', 'FAC23'),
+  ('Milly', 'FAC23'),
+  ('Miah', 'FAC23'),
+  ('Adam', 'FAC23'),
+  ('Anna', 'FAC22')
+;
+
+INSERT INTO user_facts (facts, user_id) VALUES
+  ('I am a secret millionaire', 1),
+  ('I know kung fu', 2),
+  ('I have never seen Friends', 3),
+  ('I cannot ride a bike', 4),
+  ('I still have my xmas tree up!', 5)
+;
+
+COMMIT;
+
+```
+6. Add `model.js` (use later to modularise)
+
 ## Create database locally
+
 
 ## Automatic repopulate db for testing 
 
 ## set up creat db and repopulate db for other people to use if they download it. 
 
 ## Middleware 
-To chain information
-
+To chain information when using post requests
 ```js
 // set up body parser
 const bodyParser = express.urlencoded();
