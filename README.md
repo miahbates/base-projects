@@ -69,7 +69,7 @@ server.listen(PORT, () => {
 })
 ```
 
-## Set up cypress test example. 
+## Set up cypress test 
 ```js
 // Add test.js file to cypress/intergration
 
@@ -104,6 +104,13 @@ Add `<link rel="stylesheet" type="text/css" href="./index.css">` to head of html
 ## Automatic repopulate db for testing 
 
 ## set up creat db and repopulate db for other people to use if they download it. 
+
+## Deploy to Heroku
+1. Create account
+2. Create new app (*lowercase name and europe region*)
+3. *Connect to github* - search for you repo
+4. Add `Procfile` to root of project with `web: node server.js` inside.
+5. Edit port `const PORT = process.env.PORT || 3000` 
 
 
 
