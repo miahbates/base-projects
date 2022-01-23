@@ -7,7 +7,7 @@
 4. `git branch -M main`
 5. `git push -u origin main`
 
-## Clone from GitHub
+## Clone from GitHub (if not creating locally)
 1. `git clone [GIT URL]`
 2. `cd project-name`
 
@@ -20,21 +20,32 @@
 4. `touch .gitignore`
 5. `touch .env`
 6. `code .`
-7. Add `node_modules` and `.env` to .gitignore file
+7. Add `node_modules` and `.env` to .gitignore file (`echo "node_modules\n.env\n" >> .gitignore`)
 8. Change `test` script to `cypress open` in `package.json`
-9. Add a `start` script as `node -r dotenv/config server.js` 
+9. Add a `start` script as `node server.js` 
 10. Add a `dev` script as `nodemon -r dotenv/config server.js` 
-
+11. Run cypress to get files `npm run test`
 
 ## Set up express server
-- Make server.js file on root. 
-- Add port ``` const PORT = 3333; ```
-- Listen to port 
-``` 
+Make server.js file on root. 
+```js
+// Import express
+const express = require("express");
+
+// Port to listen on
+const PORT = 3333;
+
+// Create server
+const server = express();
+
+// Set up routes
+server.get("/", (request, response) => response.send('hello world'))
+
+// Run server
 server.listen(PORT, () => { 
   console.log(`listening on http://localhost:${PORT}`);
 })
- ```
+```
 
 
 
