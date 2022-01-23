@@ -168,11 +168,73 @@ COMMIT;
 6. Add `model.js` (use later to modularise)
 
 ## Create database locally
+1. `psql`
+2. `psql -c "CREATE USER mydbuser WITH PASSWORD pass123"`
+3. `psql -c "CREATE DATABASE mydb WITH OWNER mydbuser"`
+4. Add DB_URL to .env file 
+Eg. `DATABASE_URL='postgres://mydbuser:pass123@localhost:5432/mydb'`
 
+## Set up shell for create_db and repopulate_db for others to use.
+1. Create `scripts` folder on the root with `create_db` and  `repopulate_db` files
+```
+// Add to create_db
+# #! /bin/sh
+
+# # stop script when an error occurs
+# set -e
+
+# # name will be whatever the first argument is when called
+# # e.g. ./scripts/create_db mydb => DB_NAME='mydb' (defaults to "example")
+DB_NAME=${1:-example}
+
+# psql -q -c "CREATE USER ${DB_NAME}user SUPERUSER PASSWORD 'pass123'"
+# echo "Created Postgres user '${DB_NAME}user'"
+
+# psql -q -c "CREATE DATABASE ${DB_NAME} WITH OWNER ${DB_NAME}user"
+# echo "Created Postgres database '${DB_NAME}'"
+
+DB_URL="postgres://${DB_NAME}user:pass123@localhost:5432/${DB_NAME}"
+echo "DATABASE_URL='${DB_URL}'" > .env
+echo "Created .env containing DATABASE_URL"
+```
+RUN`./scripts/create_db mydb` 
+```
+// Add to repopulate_db
+#! /bin/sh
+
+# stop script when an error occurs
+set -e
+
+# import .env so we can access DB URL
+. .env
+
+psql $DATABASE_URL -q -f "./database/init.sql"
+echo "Populated database tables"
+```
+RUN `./scripts/populate_db`
+
+!ISSUE WITH PERMISSIONS ---> Add `chmod +x` prefix to the script commands.
 
 ## Automatic repopulate db for testing 
+1. Add to cypress/pluggins/index.js file
+```
+// const build = require("../../database/build.js");
+const { execFileSync } = require("child_process");
 
-## set up creat db and repopulate db for other people to use if they download it. 
+module.exports = (on, config) => {
+  on("task", {
+    resetDb: () => {
+      return execFileSync("./scripts/populate_db");
+    },
+  });
+};
+```
+2. Add to cypress/integration/test.js file
+```
+beforeEach(() => {
+  cy.task("resetDb");
+});
+```
 
 ## Middleware 
 To chain information when using post requests
@@ -190,9 +252,4 @@ server.post("/", bodyParser, home.addFact);
 3. *Connect to github* - search for you repo
 4. Add `Procfile` to root of project with `web: node server.js` inside.
 5. Edit port `const PORT = process.env.PORT || 3000` 
-
-
-
-
-
-
+6. If issues connecting to DB add `psql [insert heroku db URL] -f database/init.sql`
