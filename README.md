@@ -237,7 +237,7 @@ beforeEach(() => {
 ```
 
 ## Sanitization
-When you get request.body of input, ensure sanitized so can't insert html.
+When you get request.body of input, ensure sanitized to prevent cross-site scripting.
 ```js
 function addFact(request, response) {
   const firstName = request.body.first_name.replace(/</g, "&lt;");
