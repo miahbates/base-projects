@@ -236,6 +236,16 @@ beforeEach(() => {
 });
 ```
 
+## Sanitization
+When you get request.body of input, ensure sanitized so can't insert html.
+```js
+function addFact(request, response) {
+  const firstName = request.body.first_name.replace(/</g, "&lt;");
+  const cohort = request.body.cohort.replace(/</g, "&lt;");
+  const facts = request.body.facts.replace(/</g, "&lt;");
+})
+ ```
+
 ## Middleware 
 To chain information when using post requests
 ```js
