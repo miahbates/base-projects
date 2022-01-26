@@ -188,15 +188,16 @@ Eg. `DATABASE_URL='postgres://mydbuser:pass123@localhost:5432/mydb'`
 # # e.g. ./scripts/create_db mydb => DB_NAME='mydb' (defaults to "example")
 DB_NAME=${1:-example}
 
-# psql -q -c "CREATE USER ${DB_NAME}user SUPERUSER PASSWORD 'pass123'"
-# echo "Created Postgres user '${DB_NAME}user'"
+psql -q -c "CREATE USER ${DB_NAME}user SUPERUSER PASSWORD 'pass123'"
+echo "Created Postgres user '${DB_NAME}user'"
 
-# psql -q -c "CREATE DATABASE ${DB_NAME} WITH OWNER ${DB_NAME}user"
-# echo "Created Postgres database '${DB_NAME}'"
+psql -q -c "CREATE DATABASE ${DB_NAME} WITH OWNER ${DB_NAME}user"
+echo "Created Postgres database '${DB_NAME}'"
 
-DB_URL="postgres://${DB_NAME}user:pass123@localhost:5432/${DB_NAME}"
+DB_URL="postgres://${DB_NAME}user:1234@localhost:5432/${DB_NAME}"
 echo "DATABASE_URL='${DB_URL}'" > .env
 echo "Created .env containing DATABASE_URL"
+
 ```
 RUN`./scripts/create_db mydb` 
 ```
