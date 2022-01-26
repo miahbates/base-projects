@@ -175,8 +175,8 @@ COMMIT;
 4. Add DB_URL to .env file 
 Eg. `DATABASE_URL='postgres://mydbuser:pass123@localhost:5432/mydb'`
 
-## Set up shell for create_db and repopulate_db (set up your own or for others to use)
-1. Create `scripts` folder on the root with `create_db` and  `repopulate_db` files
+## Set up shell for create_db and populate_db (set up your own or for others to use)
+1. Create `scripts` folder on the root with `create_db` and  `populate_db` files
 ```
 // Add to create_db
 # #! /bin/sh
@@ -217,7 +217,7 @@ RUN `./scripts/populate_db`
 
 !ISSUE WITH PERMISSIONS ---> Add `chmod +x` prefix to the script commands.
 
-## Automatic repopulate db for testing 
+## Automatic populate db for testing 
 1. Add to cypress/pluggins/index.js file
 ```
 // const build = require("../../database/build.js");
