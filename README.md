@@ -18,8 +18,8 @@ Project set up instructions using express, postgreSQL, node from *[Founders and 
 3. `npm install -D nodemon`
 3. `npm install -D cypress`
 3. `npm install -D dotenv`
-4. `touch .gitignore`
-5. `touch .env`
+4. `touch .gitignore` 
+5. `touch .env` (only make if not using script_db/repopulate_db scripts.
 6. `code .`
 7. Add `node_modules` and `.env` to .gitignore file (`echo "node_modules\n.env\n" >> .gitignore`)
 8. Change `test` script to `cypress open` in `package.json`
