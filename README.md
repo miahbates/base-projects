@@ -201,7 +201,7 @@ echo "Created .env containing DATABASE_URL"
 ```
 RUN`./scripts/create_db mydb` 
 ```
-// Add to repopulate_db
+// Add to populate_db
 #! /bin/sh
 
 # stop script when an error occurs
