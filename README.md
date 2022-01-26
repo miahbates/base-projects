@@ -19,7 +19,7 @@ Project set up instructions using express, postgreSQL, node from *[Founders and 
 3. `npm install -D cypress`
 3. `npm install -D dotenv`
 4. `touch .gitignore` 
-5. `touch .env` (only make if not using script_db/repopulate_db scripts.
+5. `touch .env` (only make if not using script_db/repopulate_db scripts.)
 6. `code .`
 7. Add `node_modules` and `.env` to .gitignore file (`echo "node_modules\n.env\n" >> .gitignore`)
 8. Change `test` script to `cypress open` in `package.json`
@@ -168,14 +168,14 @@ COMMIT;
 ```
 6. Add `model.js` (use later to modularise)
 
-## Create database locally
+## Create database locally (use this OR shell not both!)
 1. `psql`
 2. `psql -c "CREATE USER mydbuser WITH PASSWORD pass123"`
 3. `psql -c "CREATE DATABASE mydb WITH OWNER mydbuser"`
 4. Add DB_URL to .env file 
 Eg. `DATABASE_URL='postgres://mydbuser:pass123@localhost:5432/mydb'`
 
-## Set up shell for create_db and repopulate_db for others to use.
+## Set up shell for create_db and repopulate_db (set up your own or for others to use)
 1. Create `scripts` folder on the root with `create_db` and  `repopulate_db` files
 ```
 // Add to create_db
