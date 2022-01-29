@@ -258,6 +258,34 @@ const bodyParser = express.urlencoded();
 server.post("/", bodyParser, home.addFact);
 ```
 
+## Encryption 
+Require `cyypto` and `bcrypt`
+```js
+const crypto = require("crypto");
+const bcrypt = require("bcryptjs");
+```
+Run `npm install bcrypt.js`
+
+## Cookies
+Run `npm install cookie-parser`
+
+Cookie parser
+Add to server.js file
+```js
+const cookieParser = require("cookie-parser");
+server.use(cookieParser(process.env.COOKIE_SECRET));
+```
+
+Add to auth.js file to call when generating cookies.
+```js
+const COOKIE_OPTIONS = {
+  httpOnly: true,
+  maxAge: 600000,
+  sameSite: "strict",
+  signed: true,
+};
+```
+
 ## Deploy to Heroku
 1. Create account
 2. Create new app (*lowercase name and europe region*)
