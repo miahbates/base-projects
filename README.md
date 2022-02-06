@@ -174,6 +174,7 @@ COMMIT;
 3. `psql -c "CREATE DATABASE mydb WITH OWNER mydbuser"`
 4. Add DB_URL to .env file 
 Eg. `DATABASE_URL='postgres://mydbuser:pass123@localhost:5432/mydb'`
+(don't forget npm install pg)
 
 ## Set up shell for create_db and populate_db (set up your own or for others to use)
 1. Create `scripts` folder on the root with `create_db` and  `populate_db` files
