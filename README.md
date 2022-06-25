@@ -1,5 +1,5 @@
 # Base-project 
-Project set up instructions using express, postgreSQL, node from *[Founders and Coders](https://www.foundersandcoders.com/)* curriculum✨
+Project set up instructions using express, postgreSQL, node. Notes inspired from *[Founders and Coders](https://www.foundersandcoders.com/)* curriculum✨
 
 ## Create local repo
 1. `mkdir project-name && cd project-name`
